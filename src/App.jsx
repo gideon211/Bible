@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { fetchVerseByEmotion } from "./api/bibeVerseAPI";
-import VerseDisplay from "./components/VerseDisplay";
+import VerseDisplay from "./components/VerseCard";
 
 const emotions = [
   { key: "sad", label: "Sad", description: "Feeling down or sorrowful", emoji: "😔", color: "border-blue-500 bg-blue-50" },
