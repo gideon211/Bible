@@ -1,8 +1,8 @@
 // src/App.jsx
 
 import React, { useState } from "react";
-import { fetchVerseByEmotion } from "./api/bibleVerseAPI";
-import VerseDisplay from "./components/verseDIsplay";
+import { fetchVerseByEmotion } from "./api/bibeVerseAPI";
+import VerseDisplay from "./components/VerseDisplay";
 
 const emotions = [
   { key: "sad", label: "Sad", description: "Feeling down or sorrowful", emoji: "😔", color: "border-blue-500 bg-blue-50" },
@@ -16,18 +16,29 @@ const emotions = [
 export default function App() {
   const [selectedEmotion, setSelectedEmotion] = useState(null);
   const [verse, setVerse] = useState(null);
+  const [emotionKey, setEmotionKey] = useState(null);
 
   const handleEmotionClick = async (key, label) => {
     setSelectedEmotion(label);
+    setEmotionKey(key);
     const verse = await fetchVerseByEmotion(key);
     setVerse(verse);
   };
 
+  const handleGetAnotherVerse = async () => {
+    if (emotionKey) {
+      const newVerse = await fetchVerseByEmotion(emotionKey);
+      setVerse(newVerse);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
-      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">🙏 Bible Verses for Every Emotion</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center text-gray-800">
+        🙏 Bible Verses for Every Emotion
+      </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl w-full">
         {emotions.map((emo) => (
           <div
             key={emo.key}
@@ -43,10 +54,10 @@ export default function App() {
 
       {selectedEmotion && (
         <>
-          <div className="mt-8 text-xl text-gray-800 font-medium">
+          <div className="mt-8 text-xl text-gray-800 font-medium text-center">
             When you're feeling <span className="italic">{selectedEmotion.toLowerCase()}</span>...
           </div>
-          <VerseDisplay verse={verse} />
+          <VerseDisplay verse={verse} onRefresh={handleGetAnotherVerse} />
         </>
       )}
     </div>
