@@ -21,7 +21,7 @@ const VerseDisplay = ({ verse, onRefresh }) => {
       <button
         onClick={onRefresh}
         className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full font-semibold transition"
-      >
+      hover:cursor-pointer>
         Get Another Verse
       </button>
     </motion.div>
