@@ -1,5 +1,3 @@
-// src/components/VerseDisplay.jsx
-
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -12,13 +10,17 @@ const VerseDisplay = ({ verse, onRefresh }) => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="mt-6 bg-white p-6 rounded-xl shadow-md text-center max-w-xl w-full"
+      className="mt-8 bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 p-6 rounded-2xl shadow-xl text-center max-w-xl w-full border border-purple-300"
     >
-      <p className="text-lg text-gray-800 italic mb-3">"{verse.text}"</p>
-      <p className="text-sm text-gray-500 mb-4">— {verse.reference}</p>
+      <p className="text-xl sm:text-2xl font-semibold text-gray-800 italic leading-relaxed mb-4">
+        “{verse.text}”
+      </p>
+      <p className="text-sm sm:text-base text-gray-600 font-medium mb-6">
+        — {verse.reference}
+      </p>
       <button
         onClick={onRefresh}
-        className="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
+        className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full font-semibold transition"
       >
         Get Another Verse
       </button>
